@@ -1,10 +1,18 @@
 <resources>
     <string name="app_name">On your Books_G07</string>
+    <string name="App">On your Books</string>
     <string name="collection">Collection</string>
     <string name="exit">Exit</string>
     <string name="new_col">New Collection</string>
     <string name="name_col">Collection name</string>
     <string name="button_general">General</string>
     <string name="button_novel">Novel</string>
+    <string name="col_date">DD/MM/YY</string>
+    <string name="col_name">NAME</string>
+    <string name="col_price">PRICE</string>
+    <string name="col_image">IMAGE</string>
+    <string name="key_date">DD/MM/YY</string>
+    <string name="key_name">NAME</string>
+    <string name="key_price">PRICE</string>
 
 </resources>
