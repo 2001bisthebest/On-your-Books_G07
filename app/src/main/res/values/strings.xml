@@ -4,4 +4,7 @@
     <string name="exit">Exit</string>
     <string name="new_col">New Collection</string>
     <string name="name_col">Collection name</string>
+    <string name="button_general">General</string>
+    <string name="button_novel">Novel</string>
+
 </resources>
