@@ -14,4 +14,6 @@
     <string name="key_date">DD/MM/YY</string>
     <string name="key_name">NAME</string>
     <string name="key_price">PRICE</string>
+    <string name="back">back</string>
+    <string name="hint_name">Name</string>
 </resources>
