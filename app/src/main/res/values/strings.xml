@@ -16,4 +16,5 @@
     <string name="key_price">PRICE</string>
     <string name="back">back</string>
     <string name="hint_name">Name</string>
+    <string name="backbtn">Back</string>
 </resources>
