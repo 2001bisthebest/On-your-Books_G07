@@ -2,8 +2,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
     android:background="@color/purple"
     android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/note"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"
+            android:fontFamily="casual"
+            android:gravity="center"
+            android:text="@string/note"
+            android:textSize="45sp" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,7 +36,8 @@
             android:layout_marginTop="150dp"
             android:fontFamily="casual"
             android:text="@string/key_date"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/editTextDate2"
@@ -47,7 +66,8 @@
             android:layout_weight="1"
             android:fontFamily="casual"
             android:text="@string/key_name"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/editTextText4"
@@ -78,7 +98,8 @@
             android:layout_weight="1"
             android:fontFamily="casual"
             android:text="@string/key_price"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -94,18 +115,35 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:backgroundTint="@color/purple"
         android:orientation="horizontal">
 
         <ImageButton
             android:id="@+id/imagebtn"
-            android:layout_width="wrap_content"
+            android:layout_width="401dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="250dp"
-            android:layout_weight="1"
             android:backgroundTint="@color/purple"
-            android:src="@mipmap/image" />
+            android:src="@mipmap/camera" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="70dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="70dp"
+            android:background="@color/navy"
+            android:gravity="center"
+            android:text="@string/submit_btn"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
     </LinearLayout>
 </LinearLayout>

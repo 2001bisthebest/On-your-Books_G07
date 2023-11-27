@@ -17,4 +17,9 @@
     <string name="back">back</string>
     <string name="hint_name">Name</string>
     <string name="backbtn">Back</string>
+    <string name="infobtn">Info</string>
+    <string name="note">NOTE</string>
+    <string name="addBook">Add Book</string>
+    <string name="submit_btn">SUBMIT</string>
+    <string name="empty_text"></string>
 </resources>
