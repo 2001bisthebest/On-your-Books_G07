@@ -38,9 +38,10 @@ public class CollectionActivity extends AppCompatActivity {
                     ok_btn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            add_name_collection_edt.getText();
+                            String nameBtn = add_name_collection_edt.getText().toString();
+                            dataList.add(new Data(""+nameBtn));
                             RecyclerView recyclerView = findViewById(R.id.recycle_view_btn);
-//                            recyclerView.setLayoutManager(new LinearLayoutManager());
+                            recyclerView.setLayoutManager(new LinearLayoutManager(CollectionActivity.this));
                             recyclerView.setHasFixedSize(true);
 
                             adapterBtn = new AdapterBtn(dataList);
@@ -51,15 +52,12 @@ public class CollectionActivity extends AppCompatActivity {
                                     Toast.makeText(getApplication(), "Clicked item "+Integer.toString(position),Toast.LENGTH_SHORT).show();
                                 }
                             });
+                            add_name_collection_edt.setText("");
                             add_name_collection_edt.setVisibility(View.INVISIBLE);
                             ok_btn.setVisibility(View.INVISIBLE);
                         }
                     });
                 }
-//                if(!isClicked){
-//                    add_name_collection_edt.setVisibility(View.INVISIBLE);
-//                    ok_btn.setVisibility(View.INVISIBLE);
-//                }
             }
         });
     }
