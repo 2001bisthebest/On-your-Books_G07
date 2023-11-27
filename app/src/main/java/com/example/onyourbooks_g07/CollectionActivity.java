@@ -5,13 +5,65 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CollectionActivity extends AppCompatActivity {
+    private boolean isClicked = false;
+    private RecyclerView recyclerView;
+    private List<Data> dataList = new ArrayList<>();
+    private AdapterBtn adapterBtn;
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.column_list_collection);
 
+        Button new_collection_btn = findViewById(R.id.add_new_collection_btn);
+        TextView add_name_collection_edt = findViewById(R.id.add_name_collection_edt);
+        Button ok_btn = findViewById(R.id.ok_btn);
+        new_collection_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isClicked = true;
+                if(isClicked){
+                    add_name_collection_edt.setVisibility(View.VISIBLE);
+                    ok_btn.setVisibility(View.VISIBLE);
+                    ok_btn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            add_name_collection_edt.getText();
+                            RecyclerView recyclerView = findViewById(R.id.recycle_view_btn);
+//                            recyclerView.setLayoutManager(new LinearLayoutManager());
+                            recyclerView.setHasFixedSize(true);
+
+                            adapterBtn = new AdapterBtn(dataList);
+                            recyclerView.setAdapter(adapterBtn);
+                            ((AdapterBtn) adapterBtn).setOnItemClickListener(new AdapterBtn.MyClickListener() {
+                                @Override
+                                public void onItemClick(int position, View v) {
+                                    Toast.makeText(getApplication(), "Clicked item "+Integer.toString(position),Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                            add_name_collection_edt.setVisibility(View.INVISIBLE);
+                            ok_btn.setVisibility(View.INVISIBLE);
+                        }
+                    });
+                }
+//                if(!isClicked){
+//                    add_name_collection_edt.setVisibility(View.INVISIBLE);
+//                    ok_btn.setVisibility(View.INVISIBLE);
+//                }
+            }
+        });
     }
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);

@@ -22,4 +22,5 @@
     <string name="addBook">Add Book</string>
     <string name="submit_btn">SUBMIT</string>
     <string name="empty_text"></string>
+    <string name="ok">OK</string>
 </resources>
