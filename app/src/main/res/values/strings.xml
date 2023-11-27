@@ -18,4 +18,5 @@
     <string name="hint_name">Name</string>
     <string name="backbtn">Back</string>
     <string name="empty_text"></string>
+    <string name="ok">OK</string>
 </resources>
