@@ -64,13 +64,13 @@ public class CollectionActivity extends AppCompatActivity {
         });
     }
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_collection_activity, menu);
         return true;
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.infobtn) {
+        if (id == R.id.back_btn) {
             startActivity(new Intent(this, MainActivity.class));
             return false;
         }
