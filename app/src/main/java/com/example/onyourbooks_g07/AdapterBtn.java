@@ -42,11 +42,11 @@ public class AdapterBtn extends RecyclerView.Adapter<AdapterBtn.ViewHolder> {
         public void onItemClick(int position, View v);
     }
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        Button newBtn;
+        TextView newBtn;
 
         public ViewHolder(View itemView){
             super(itemView);
-            newBtn = (Button) itemView.findViewById(R.id.recycle_btn);
+            newBtn = (TextView) itemView.findViewById(R.id.recycle_btn);
             itemView.setOnClickListener(this);
         }
 

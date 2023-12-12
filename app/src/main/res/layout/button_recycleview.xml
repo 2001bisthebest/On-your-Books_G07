@@ -19,7 +19,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-        <Button
+        <TextView
             android:id="@+id/recycle_btn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
