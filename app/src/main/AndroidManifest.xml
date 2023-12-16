@@ -30,6 +30,9 @@
         <activity
             android:name=".ColumnCollectionActivity"
             android:exported="false" />
+        <activity
+            android:name=".AddBookList"
+            android:exported="false" />
     </application>
 
 </manifest>
