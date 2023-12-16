@@ -48,7 +48,7 @@ public class CollectionActivity extends AppCompatActivity {
                             ((AdapterBtn) adapterBtn).setOnItemClickListener(new AdapterBtn.MyClickListener() {
                                 @Override
                                 public void onItemClick(int position, View v) {
-                                    Toast.makeText(getApplication(), "Clicked item "+Integer.toString(position),Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(getApplication(), "Clicked item "+Integer.toString(position),Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(CollectionActivity.this, ColumnCollectionActivity.class);
                                     startActivity(intent);
                                 }
