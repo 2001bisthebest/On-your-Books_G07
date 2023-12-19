@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListsBtn {
-    private List<Data> list;
+    private ArrayList<Data> list;
 
-    public ListsBtn(){
-        list = new ArrayList<>();
+    public ListsBtn(ArrayList<Data> list){
+//        list = new ArrayList<>();
+        this.list = list;
     }
-    public void addListsBtn(String title){
-        list.add(new Data("" + title));
+    public void addListsBtn(int id, String title){
+        list.add(new Data(id, title));
         //nameBtn
     }
     public List<Data> getListsBtn(){

@@ -35,7 +35,10 @@ public class AdapterBtn extends RecyclerView.Adapter<AdapterBtn.ViewHolder> {
     }
 
     public AdapterBtn(List<Data> myDataSet){
-        dataSet = myDataSet;
+        this.dataSet = myDataSet;
+    }
+    public List<Data> getDataSet(){
+        return this.dataSet;
     }
 
     public interface MyClickListener{

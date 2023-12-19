@@ -5,9 +5,16 @@ import java.util.List;
 
 public class Data {
     private String title;
-    public Data(String title){
+    private int id;
+    public Data(int id, String title){
         this.title = title;
+        this.id = id;
     }
+
+    public int getId() {
+        return id;
+    }
+
     public String getTitle(){
         return title;
     }
