@@ -20,9 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-//    private AdapterBtn adapterBtn;
     private ListEventsData listEventsData;
-    private RecyclerView recyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,8 +31,6 @@ public class MainActivity extends AppCompatActivity {
         col_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                adapterBtn = new AdapterBtn(setList());
-//                recyclerView.setAdapter(adapterBtn);
                 Intent intent = new Intent(MainActivity.this, CollectionActivity.class);
                 startActivity(intent);
             }
@@ -46,17 +42,5 @@ public class MainActivity extends AppCompatActivity {
         SQLiteDatabase db = listEventsData.getReadableDatabase();
         Cursor cursor = db.query(TABLE_NAME_LIST, FROM, null, null, null, null, ORDER_BY);
         return cursor;
-    }
-    private List<Data> setList(){
-        Cursor cursor = getEvents();
-        Data data;
-        List<Data> list = new ArrayList<>();
-        while (cursor.moveToNext()){
-            int id = cursor.getInt(0);
-            String title = cursor.getString(1);
-            data = new Data(id, title);
-            list.add(data);
-        }
-        return list;
     }
 }

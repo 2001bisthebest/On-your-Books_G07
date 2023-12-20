@@ -10,11 +10,9 @@ public class Data {
         this.title = title;
         this.id = id;
     }
-
     public int getId() {
         return id;
     }
-
     public String getTitle(){
         return title;
     }

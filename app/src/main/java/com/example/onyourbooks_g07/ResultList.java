@@ -48,6 +48,7 @@ public class ResultList extends AppCompatActivity {
         ImageView imageView = findViewById(R.id.item_img);
 
         Cursor cursor = getEvents();
+        cursor.moveToNext();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         byte[] imageBytes = baos.toByteArray();
         imageBytes = Base64.decode(cursor.getString(5), Base64.DEFAULT);
@@ -56,7 +57,6 @@ public class ResultList extends AppCompatActivity {
         item_name.setText(cursor.getString(3));
         item_price.setText(cursor.getString(4));
         item_date.setText(cursor.getString(2));
-
     }
     private Cursor getEvents() {
         String[] FROM = {_ID, LISTID, DATE, NAME, PRICE, IMAGE};

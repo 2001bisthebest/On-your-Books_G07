@@ -51,7 +51,7 @@ public class CollectionActivity extends AppCompatActivity {
         Button new_collection_btn = findViewById(R.id.add_new_collection_btn);
         TextView add_name_collection_edt = findViewById(R.id.add_name_collection_edt);
         Button ok_btn = findViewById(R.id.ok_btn);
-        RecyclerView recyclerView = findViewById(R.id.recycle_view_btn);
+        recyclerView = findViewById(R.id.recycle_view_btn);
         recyclerView.setLayoutManager(new LinearLayoutManager(CollectionActivity.this));
         recyclerView.setHasFixedSize(true);
 
@@ -77,8 +77,9 @@ public class CollectionActivity extends AppCompatActivity {
                                 Data item = adapterBtn.getDataSet().get(position);
                                 Intent intent = new Intent(CollectionActivity.this, ColumnCollectionActivity.class);
                                 String idItem = item.getId() + "";
-                                Log.d("ta", idItem);
+                                String titleItem = item.getTitle();
                                 intent.putExtra("id_of_item", idItem);
+                                intent.putExtra("title", titleItem);
                                 startActivity(intent);
                             }
                         });
@@ -95,8 +96,9 @@ public class CollectionActivity extends AppCompatActivity {
                 Data item = adapterBtn.getDataSet().get(position);
                 Intent intent = new Intent(CollectionActivity.this, ColumnCollectionActivity.class);
                     String idItem = item.getId() + "";
-                    Log.d("ta", idItem);
+                    String titleItem = item.getTitle();
                     intent.putExtra("id_of_item", idItem);
+                    intent.putExtra("title", titleItem);
                 startActivity(intent);
             }
         });
@@ -106,9 +108,7 @@ public class CollectionActivity extends AppCompatActivity {
             SQLiteDatabase db = listEventsData.getWritableDatabase();
             ContentValues values = new ContentValues();
             values.put(COLLECTION_NAME, colName);
-            Log.d("ta", values.toString());
             long ja = db.insert(TABLE_NAME_LIST, null, values);
-            Log.d("ta", String.valueOf(ja));
         }catch (Exception e) {
             Log.e("Add Error", e.getMessage());
         }

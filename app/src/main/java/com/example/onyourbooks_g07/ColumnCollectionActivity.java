@@ -16,7 +16,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
@@ -30,8 +33,9 @@ import java.util.HashMap;
 public class ColumnCollectionActivity extends AppCompatActivity {
     boolean isVisible = false;
     private CollectionEventsData collectionEventsData;
-    private String idItem, idItemList;
+    private String idItem, idItemList, titleItem;
     ListView listView;
+    Cursor cursor;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_collection);
@@ -40,19 +44,39 @@ public class ColumnCollectionActivity extends AppCompatActivity {
             Bundle extras = getIntent().getExtras();
             if(extras == null) {
                 idItem = null;
+                titleItem = null;
             } else {
                 idItem = extras.getString("id_of_item");
+                titleItem = extras.getString("title");
             }
         } else {
             idItem = (String) savedInstanceState.getSerializable("id_of_item");
+            titleItem = (String) savedInstanceState.getSerializable("title");
         }
-        Log.d("ta", idItem);
         collectionEventsData = new CollectionEventsData(ColumnCollectionActivity.this);
         FloatingActionButton plusBtn = findViewById(R.id.plusBtn);
         FloatingActionButton addBookBtn = findViewById(R.id.addBookBtn);
         TextView addBook = findViewById(R.id.addBook);
         listView = (ListView)findViewById(R.id.listView);
+        TextView name_list = findViewById(R.id.name_list);
+        SearchView search_icon = findViewById(R.id.search_icon);
 
+        search_icon.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                cursor = search(s);
+                showEvents(cursor);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                cursor = search(s);
+                showEvents(cursor);
+                return true;
+            }
+        });
+        name_list.setText(titleItem);
         addBookBtn.setVisibility(View.GONE);
         addBook.setVisibility(View.GONE);
         plusBtn.setOnClickListener(view -> {
@@ -76,15 +100,18 @@ public class ColumnCollectionActivity extends AppCompatActivity {
         });
 
         try{
-            Cursor cursor = getEvents();
+            cursor = getEvents();
             showEvents(cursor);
-            idItemList = cursor.getInt(0) + "";
         }finally {
             collectionEventsData.close();
         }
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                if(cursor.moveToPosition(i)){
+                    idItemList = cursor.getInt(0) + "";
+                }
+
                 Intent intent = new Intent(ColumnCollectionActivity.this, ResultList.class);
                 intent.putExtra("id_of_item_list", idItemList);
                 startActivity(intent);
@@ -95,13 +122,12 @@ public class ColumnCollectionActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         try{
-            Cursor cursor = getEvents();
+            cursor = getEvents();
             showEvents(cursor);
         }finally {
             collectionEventsData.close();
         }
     }
-
     private void showEvents(Cursor cursor) {
         final ArrayList<HashMap<String, String>> MyArrList = new ArrayList<HashMap<String, String>>();
         HashMap<String, String> map;
@@ -122,6 +148,15 @@ public class ColumnCollectionActivity extends AppCompatActivity {
         String SELECTION = LISTID+"="+idItem;
         SQLiteDatabase db = collectionEventsData.getReadableDatabase();
         Cursor cursor = db.query(TABLE_NAME_COL, FROM, SELECTION, null, null, null, ORDER_BY);
+        return cursor;
+    }
+    private Cursor search(String search) {
+        String[] FROM = {_ID, LISTID, DATE, NAME, PRICE, IMAGE};
+        String ORDER_BY = _ID + " DESC";
+        String SELECTION = NAME + " LIKE ?" ;
+        String[] SELECTIONARGS = {"%" + search + "%"};
+        SQLiteDatabase db = collectionEventsData.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_NAME_COL, FROM, SELECTION, SELECTIONARGS, null, null, ORDER_BY);
         return cursor;
     }
 }
