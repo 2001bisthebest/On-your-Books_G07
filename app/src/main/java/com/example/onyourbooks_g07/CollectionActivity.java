@@ -40,56 +40,64 @@ import java.util.List;
 
 
 public class CollectionActivity extends AppCompatActivity {
-//    private boolean isClicked = false;
     private RecyclerView recyclerView;
-    public ListsBtn listsBtn;
     private AdapterBtn adapterBtn;
     private ListEventsData listEventsData;
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.column_list_collection);
 
-
         listEventsData = new ListEventsData(CollectionActivity.this);
-        listsBtn = new ListsBtn(new ArrayList<>());
         Button new_collection_btn = findViewById(R.id.add_new_collection_btn);
         TextView add_name_collection_edt = findViewById(R.id.add_name_collection_edt);
+        Button ok_btn = findViewById(R.id.ok_btn);
         RecyclerView recyclerView = findViewById(R.id.recycle_view_btn);
         recyclerView.setLayoutManager(new LinearLayoutManager(CollectionActivity.this));
         recyclerView.setHasFixedSize(true);
+
         adapterBtn = new AdapterBtn(setList());
         recyclerView.setAdapter(adapterBtn);
-        Button ok_btn = findViewById(R.id.ok_btn);
+        recyclerView.setAdapter(adapterBtn);
         new_collection_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    add_name_collection_edt.setVisibility(View.VISIBLE);
-                    ok_btn.setVisibility(View.VISIBLE);
-                    ok_btn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            String nameBtn = add_name_collection_edt.getText().toString();
-                            addData(nameBtn);
+                add_name_collection_edt.setVisibility(View.VISIBLE);
+                ok_btn.setVisibility(View.VISIBLE);
+                ok_btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        String nameBtn = add_name_collection_edt.getText().toString();
+                        addData(nameBtn);
 
-                            adapterBtn = new AdapterBtn(setList());
-                            recyclerView.setAdapter(adapterBtn);
-                            ((AdapterBtn) adapterBtn).setOnItemClickListener(new AdapterBtn.MyClickListener() {
-                                @Override
-                                public void onItemClick(int position, View v) {
-//                                    Data item = adapterBtn.getDataSet().get(position);
-                                    Intent intent = new Intent(CollectionActivity.this, ColumnCollectionActivity.class);
-//                                    String idItem = item.getId() + "";
-//                                    Log.d("ta", idItem);
-//                                    intent.putExtra("id_of_item", idItem);
-                                    startActivity(intent);
-                                }
-                            });
-                            add_name_collection_edt.setText("");
-                            add_name_collection_edt.setVisibility(View.INVISIBLE);
-                            ok_btn.setVisibility(View.INVISIBLE);
-                        }
-                    });
-
+                        adapterBtn = new AdapterBtn(setList());
+                        recyclerView.setAdapter(adapterBtn);
+                        ((AdapterBtn) adapterBtn).setOnItemClickListener(new AdapterBtn.MyClickListener() {
+                            @Override
+                            public void onItemClick(int position, View v) {
+                                Data item = adapterBtn.getDataSet().get(position);
+                                Intent intent = new Intent(CollectionActivity.this, ColumnCollectionActivity.class);
+                                String idItem = item.getId() + "";
+                                Log.d("ta", idItem);
+                                intent.putExtra("id_of_item", idItem);
+                                startActivity(intent);
+                            }
+                        });
+                        add_name_collection_edt.setText("");
+                        add_name_collection_edt.setVisibility(View.INVISIBLE);
+                        ok_btn.setVisibility(View.INVISIBLE);
+                    }
+                });
+            }
+        });
+        ((AdapterBtn) adapterBtn).setOnItemClickListener(new AdapterBtn.MyClickListener() {
+            @Override
+            public void onItemClick(int position, View v) {
+                Data item = adapterBtn.getDataSet().get(position);
+                Intent intent = new Intent(CollectionActivity.this, ColumnCollectionActivity.class);
+                    String idItem = item.getId() + "";
+                    Log.d("ta", idItem);
+                    intent.putExtra("id_of_item", idItem);
+                startActivity(intent);
             }
         });
     }
@@ -138,5 +146,4 @@ public class CollectionActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 }

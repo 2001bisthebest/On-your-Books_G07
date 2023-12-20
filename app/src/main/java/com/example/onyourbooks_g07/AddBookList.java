@@ -22,10 +22,12 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import static com.example.onyourbooks_g07.Constants.LISTID;
 import static com.example.onyourbooks_g07.Constants.NAME;
 import static com.example.onyourbooks_g07.Constants.DATE;
 import static com.example.onyourbooks_g07.Constants.IMAGE;
 import static com.example.onyourbooks_g07.Constants.PRICE;
+import static com.example.onyourbooks_g07.Constants.TABLE_NAME_COL;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -37,62 +39,65 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 public class AddBookList extends AppCompatActivity {
-    DateFormat fmtDateAndTime = DateFormat.getDateInstance();
+    DateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy");
     Calendar myCalendar = Calendar.getInstance();
-    private CollectionEventsData events;
-    String table_name;
-    private ListsBtn listsBtn;
+    private CollectionEventsData collectionEventsData;
     private Uri image_uri;
+    private String listId;
+    String dateStr;
     ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    if (result.getResultCode() == Activity.RESULT_OK) {
-                        Intent data = result.getData();
+        new ActivityResultContracts.StartActivityForResult(),
+        new ActivityResultCallback<ActivityResult>() {
+            @Override
+            public void onActivityResult(ActivityResult result) {
+                if (result.getResultCode() == Activity.RESULT_OK) {
+                    Intent data = result.getData();
+                    try {
+                        Uri uri = data.getData();
+                        image_uri = uri;
                         try {
-                            Uri uri = data.getData();
-                            image_uri = uri;
-                            try {
-                                ImageView imageView = (ImageView) findViewById(R.id.imageView);
-                                imageView.getLayoutParams().height = 400;
-                                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-                                imageView.setImageBitmap(bitmap);
+                            ImageView imageView = (ImageView) findViewById(R.id.imageView);
+                            imageView.getLayoutParams().height = 400;
+                            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                            imageView.setImageBitmap(bitmap);
                             } catch (FileNotFoundException e) {
                                 e.printStackTrace();
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
                         } catch (Exception e) {
-                            Log.e("Log", "Error from Gallery Activity");
-                        }
+                        Log.e("Log", "Error from Gallery Activity");
                     }
                 }
-            });
-
-
+            }
+        });
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_book_list);
 
-        events = new CollectionEventsData(AddBookList.this);
-//        try{
-            listsBtn = new ListsBtn(new ArrayList<>());
-            table_name = listsBtn.getListsBtn().toString();
-//        }catch (Exception e){
-//            Log.e("ffff",table_name);
-//        }
+        dateStr = updateLabel();
+        if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if(extras == null) {
+                listId = null;
+            } else {
+                listId = extras.getString("id_of_item");
+            }
+        } else {
+            listId = (String) savedInstanceState.getSerializable("id_of_item");
+        }
+        Log.d("ta", listId);
 
-        Log.d("ta",table_name);
+        collectionEventsData = new CollectionEventsData(AddBookList.this);
         ImageButton pickDateBtn = findViewById(R.id.pickDateBtn);
         EditText book_name = findViewById(R.id.book_name);
         EditText book_price = findViewById(R.id.book_price);
         Button submitBtn = findViewById(R.id.submitBtn);
-        String dateStr;
 
         pickDateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,7 +107,7 @@ public class AddBookList extends AppCompatActivity {
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
-        dateStr = updateLabel();
+
         ImageButton imageBtn = findViewById(R.id.imageBtn);
         imageBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -115,12 +120,13 @@ public class AddBookList extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String book_nameStr, book_priceStr;
+                dateStr = updateLabel();
                 book_nameStr = book_name.getText().toString();
                 book_priceStr = book_price.getText().toString();
                 addData(dateStr, book_nameStr, book_priceStr);
+                finish();
             }
         });
-
     }
     public void addData(String dateStr,String book_name, String book_price){
         try{
@@ -140,20 +146,20 @@ public class AddBookList extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            SQLiteDatabase db = events.getWritableDatabase();
+            SQLiteDatabase db = collectionEventsData.getWritableDatabase();
             ContentValues values = new ContentValues();
+            values.put(LISTID, listId);
             values.put(DATE, dateStr);
             values.put(NAME, book_name);
             values.put(PRICE, book_price);
             values.put(IMAGE, imageString);
-            db.insert(table_name, null, values);
+            db.insert(TABLE_NAME_COL, null, values);
         }catch (Exception e) {
             Log.e("Add Error", e.getMessage());
         }
     }
     DatePickerDialog.OnDateSetListener d = new DatePickerDialog.OnDateSetListener() {
-        public void onDateSet(DatePicker view, int year, int monthOfYear,
-                              int dayOfMonth) {
+        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
             myCalendar.set(Calendar.YEAR, year);
             myCalendar.set(Calendar.MONTH, monthOfYear);
             myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
@@ -162,8 +168,8 @@ public class AddBookList extends AppCompatActivity {
     };
     private String updateLabel() {
         TextView date_picker = findViewById(R.id.date_picker);
-        date_picker.setText(fmtDateAndTime.format(myCalendar.getTime()));
-        return date_picker.toString();
+        date_picker.setText(dateFormat.format(myCalendar.getTime()));
+        return date_picker.getText().toString();
     }
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_collection_activity, menu);
