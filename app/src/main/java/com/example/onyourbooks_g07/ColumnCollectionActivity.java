@@ -153,7 +153,7 @@ public class ColumnCollectionActivity extends AppCompatActivity {
     private Cursor search(String search) {
         String[] FROM = {_ID, LISTID, DATE, NAME, PRICE, IMAGE};
         String ORDER_BY = _ID + " DESC";
-        String SELECTION = NAME + " LIKE ?" ;
+        String SELECTION = LISTID+"="+idItem + " AND " +NAME + " LIKE ?" ;
         String[] SELECTIONARGS = {"%" + search + "%"};
         SQLiteDatabase db = collectionEventsData.getReadableDatabase();
         Cursor cursor = db.query(TABLE_NAME_COL, FROM, SELECTION, SELECTIONARGS, null, null, ORDER_BY);
