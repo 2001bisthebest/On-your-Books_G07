@@ -30,8 +30,8 @@ import java.util.HashMap;
 public class ColumnCollectionActivity extends AppCompatActivity {
     boolean isVisible = false;
     private CollectionEventsData collectionEventsData;
-    private String idItem;
-    final ListView listView = (ListView)findViewById(R.id.listView);
+    private String idItem, idItemList;
+    ListView listView;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_collection);
@@ -51,6 +51,7 @@ public class ColumnCollectionActivity extends AppCompatActivity {
         FloatingActionButton plusBtn = findViewById(R.id.plusBtn);
         FloatingActionButton addBookBtn = findViewById(R.id.addBookBtn);
         TextView addBook = findViewById(R.id.addBook);
+        listView = (ListView)findViewById(R.id.listView);
 
         addBookBtn.setVisibility(View.GONE);
         addBook.setVisibility(View.GONE);
@@ -77,17 +78,18 @@ public class ColumnCollectionActivity extends AppCompatActivity {
         try{
             Cursor cursor = getEvents();
             showEvents(cursor);
+            idItemList = cursor.getInt(0) + "";
         }finally {
             collectionEventsData.close();
         }
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                Intent intent = new Intent(ColumnCollectionActivity.this, ResultList.class);
-//                intent.putExtra("id_of_item_list", idItemList);
-//                startActivity(intent);
-//            }
-//        });
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(ColumnCollectionActivity.this, ResultList.class);
+                intent.putExtra("id_of_item_list", idItemList);
+                startActivity(intent);
+            }
+        });
     }
     @Override
     protected void onResume() {
