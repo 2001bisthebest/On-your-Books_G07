@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">On your Books_G07</string>
+    <string name="App">On your Books</string>
+    <string name="collection">คอลเลคชัน</string>
+    <string name="exit">ออกจากแอป</string>
+    <string name="new_col">เพิ่มคอลเลคชัน</string>
+    <string name="name_col">ชื่อคอลเลคชัน</string>
+    <string name="button_general">ทั่วไป</string>
+    <string name="button_novel">นิยาย</string>
+    <string name="col_date">วันที่</string>
+    <string name="col_name">ชื่อหนังสือ</string>
+    <string name="col_price">ราคา</string>
+    <string name="col_image">รูปภาพ</string>
+    <string name="back">กลับ</string>
+    <string name="hint_name">ชื่อหนังสือ</string>
+    <string name="backbtn">กลับ</string>
+    <string name="infobtn">ข้อมูล</string>
+    <string name="note">โน๊ต</string>
+    <string name="addBook">เพิ่มหนังสือ</string>
+    <string name="submit_btn">ตกลง</string>
+    <string name="empty_text"></string>
+    <string name="ok">โอเค</string>
+    <string name="item_name">ชื่อคอลเลคชัน</string>
+</resources>

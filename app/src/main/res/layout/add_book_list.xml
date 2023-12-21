@@ -35,7 +35,7 @@
             android:layout_marginLeft="50dp"
             android:layout_marginTop="150dp"
             android:fontFamily="casual"
-            android:text="@string/key_date"
+            android:text="@string/col_date"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -75,7 +75,7 @@
             android:layout_marginTop="20dp"
             android:layout_weight="1"
             android:fontFamily="casual"
-            android:text="@string/key_name"
+            android:text="@string/col_name"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -107,7 +107,7 @@
             android:layout_marginTop="20dp"
             android:layout_weight="1"
             android:fontFamily="casual"
-            android:text="@string/key_price"
+            android:text="@string/col_price"
             android:textSize="20sp"
             android:textStyle="bold" />
 

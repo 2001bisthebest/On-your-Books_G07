@@ -35,14 +35,6 @@
             android:gravity="center"
             android:text="@string/col_price" />
 
-        <TextView
-            android:id="@+id/col_img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/col_image" />
-
     </LinearLayout>
 
 </LinearLayout>

@@ -139,7 +139,7 @@ public class ColumnCollectionActivity extends AppCompatActivity {
             map.put(IMAGE, cursor.getString(5));
             MyArrList.add(map);
         }
-        SimpleAdapter simpleAdapter = new SimpleAdapter(ColumnCollectionActivity.this, MyArrList, R.layout.column_collection, new String[]{"date", "name", "price", "img"}, new int[]{R.id.col_date, R.id.col_name, R.id.col_price, R.id.col_img});
+        SimpleAdapter simpleAdapter = new SimpleAdapter(ColumnCollectionActivity.this, MyArrList, R.layout.column_collection, new String[]{"date", "name", "price"}, new int[]{R.id.col_date, R.id.col_name, R.id.col_price});
         listView.setAdapter(simpleAdapter);
     }
     private Cursor getEvents() {
