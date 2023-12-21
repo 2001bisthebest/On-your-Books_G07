@@ -22,4 +22,5 @@
     <string name="empty_text"></string>
     <string name="ok">โอเค</string>
     <string name="item_name">ชื่อคอลเลคชัน</string>
+    <string name="hint_price">ตัวอย่าง. 123</string>
 </resources>

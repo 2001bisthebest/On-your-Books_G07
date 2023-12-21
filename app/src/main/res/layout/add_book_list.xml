@@ -2,62 +2,59 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center"
-    android:background="@color/purple"
+    android:background="@color/blue"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/btnMarX"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/note"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_weight="1"
-            android:fontFamily="casual"
+            android:layout_marginBottom="@dimen/btnMarY"
             android:gravity="center"
             android:text="@string/note"
-            android:textSize="45sp" />
+            android:textSize="@dimen/textSizeL" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/objSpace"
+        android:layout_marginEnd="@dimen/objSpace"
+        android:layout_marginBottom="@dimen/listViewMarY"
         android:orientation="horizontal">
 
         <TextView
             android:id="@+id/key_date"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/textViewSize"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="150dp"
-            android:fontFamily="casual"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/paddingBtn"
+            android:layout_weight="2"
             android:text="@string/col_date"
-            android:textSize="20sp"
+            android:textSize="@dimen/textSizeM"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/date_picker"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="150dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"
-            android:layout_weight="1"
-            android:text="TextView"
-            android:textSize="20sp" />
+            android:layout_marginEnd="@dimen/listViewMarY"
+            android:layout_weight="3"
+            android:gravity="center_vertical"
+            android:text="TextView" />
 
         <ImageButton
             android:id="@+id/pickDateBtn"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/listViewMarX"
             android:layout_height="wrap_content"
-            android:layout_marginTop="150dp"
-            android:layout_marginEnd="20dp"
             android:layout_weight="1"
+            android:backgroundTint="@color/blue"
             android:src="@android:drawable/ic_input_add" />
 
     </LinearLayout>
@@ -65,29 +62,28 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/objSpace"
+        android:layout_marginEnd="@dimen/objSpace"
+        android:layout_marginBottom="@dimen/listViewMarY"
         android:orientation="horizontal">
 
         <TextView
             android:id="@+id/key_name"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/textViewSize"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="20dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/paddingBtn"
             android:layout_weight="1"
-            android:fontFamily="casual"
             android:text="@string/col_name"
-            android:textSize="20sp"
+            android:textSize="@dimen/textSizeM"
             android:textStyle="bold" />
 
         <EditText
             android:id="@+id/book_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_weight="1"
-            android:ems="10"
+            android:layout_marginEnd="@dimen/paddingBtn"
+            android:layout_weight="2"
             android:hint="@string/hint_name"
             android:importantForAutofill="no"
             android:inputType="text" />
@@ -97,29 +93,30 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/objSpace"
+        android:layout_marginEnd="@dimen/objSpace"
+        android:layout_marginBottom="@dimen/listViewMarY"
         android:orientation="horizontal">
 
         <TextView
             android:id="@+id/key_price"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/textViewSize"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="20dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/paddingBtn"
             android:layout_weight="1"
-            android:fontFamily="casual"
             android:text="@string/col_price"
-            android:textSize="20sp"
+            android:textSize="@dimen/textSizeM"
             android:textStyle="bold" />
 
         <EditText
             android:id="@+id/book_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_weight="1"
-            android:ems="10"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="@dimen/paddingBtn"
+            android:layout_weight="2"
+            android:hint="@string/hint_price"
             android:inputType="number" />
 
     </LinearLayout>
@@ -127,40 +124,41 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/purple"
-        android:orientation="horizontal">
+        android:layout_marginBottom="@dimen/listViewMarY"
+        android:backgroundTint="@color/blue"
+        android:gravity="center"
+        android:orientation="vertical">
 
         <ImageButton
             android:id="@+id/imageBtn"
-            android:layout_width="401dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="250dp"
-            android:backgroundTint="@color/purple"
+            android:backgroundTint="@color/blue"
             android:src="@mipmap/camera" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="vertical">
+
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/img_show"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal" />
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/listViewMarX"
+            android:gravity="center" />
 
         <Button
             android:id="@+id/submitBtn"
             style="@style/Widget.AppCompat.Button"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="70dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginRight="70dp"
-            android:background="@color/navy"
+            android:background="@drawable/btn_form"
+            android:backgroundTint="@color/light_yellow"
             android:gravity="center"
-            android:text="@string/submit_btn"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+            android:text="@string/submit_btn" />
     </LinearLayout>
 </LinearLayout>

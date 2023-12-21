@@ -8,12 +8,15 @@ import static com.example.onyourbooks_g07.Constants.NAME;
 import static com.example.onyourbooks_g07.Constants.PRICE;
 import static com.example.onyourbooks_g07.Constants.TABLE_NAME_COL;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -64,5 +67,17 @@ public class ResultList extends AppCompatActivity {
         SQLiteDatabase db = collectionEventsData.getReadableDatabase();
         Cursor cursor = db.query(TABLE_NAME_COL, FROM, SELECTION, null, null, null, null);
         return cursor;
+    }
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_collection_activity, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.back_btn) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

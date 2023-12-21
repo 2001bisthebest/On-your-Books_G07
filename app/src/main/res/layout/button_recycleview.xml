@@ -1,29 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:cardview="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_view"
-    android:layout_gravity="center"
     android:layout_width="match_parent"
     android:layout_height="50dp"
-    android:foreground="?android:selectableItemBackground"
+    android:layout_gravity="center"
     android:layout_margin="12dp"
-    cardview:cardCornerRadius="8dp"
+    android:foreground="?android:selectableItemBackground"
     cardview:cardBackgroundColor="#FEFEFE"
+    cardview:cardCornerRadius="8dp"
     cardview:cardElevation="2dp"
     cardview:contentPadding="3dp">
 
     <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/recycle_btn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:gravity="center"
             android:text="@string/empty_text" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

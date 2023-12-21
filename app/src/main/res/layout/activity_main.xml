@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/purple"
+    android:background="@drawable/bg"
     tools:context=".MainActivity">
 
 
@@ -12,43 +12,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
-
-
-        <TextView
-            android:id="@+id/App"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:fontFamily="casual"
-            android:text="@string/App"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="@color/navy"
-            android:textSize="50sp"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="286dp"
-            android:layout_marginTop="30dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/picmain" />
-
         <Button
             android:id="@+id/collection"
             style="@style/Widget.AppCompat.Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="530dp"
             android:layout_marginRight="50dp"
-            android:fontFamily="casual"
+            android:background="@drawable/btn_form"
+            android:backgroundTint="@color/mint"
+            android:fontFamily="serif"
             android:text="@string/collection"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="30sp" />
-
 
     </LinearLayout>
 

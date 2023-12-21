@@ -14,6 +14,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -158,5 +160,18 @@ public class ColumnCollectionActivity extends AppCompatActivity {
         SQLiteDatabase db = collectionEventsData.getReadableDatabase();
         Cursor cursor = db.query(TABLE_NAME_COL, FROM, SELECTION, SELECTIONARGS, null, null, ORDER_BY);
         return cursor;
+    }
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_collection_activity, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.back_btn) {
+            startActivity(new Intent(this, CollectionActivity.class));
+            return false;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

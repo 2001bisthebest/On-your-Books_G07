@@ -67,7 +67,10 @@ public class CollectionActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         String nameBtn = add_name_collection_edt.getText().toString();
-                        addData(nameBtn);
+                        Log.d("ta", nameBtn);
+                        if(nameBtn.length() > 1){
+                            addData(nameBtn);
+                        }
 
                         adapterBtn = new AdapterBtn(setList());
                         recyclerView.setAdapter(adapterBtn);

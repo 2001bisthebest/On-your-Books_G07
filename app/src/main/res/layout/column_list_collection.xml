@@ -4,21 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/purple">
+    android:background="@color/blue">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/purple"
+        android:background="@color/blue"
         android:orientation="vertical">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycle_view_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="@dimen/listViewMarX"
+            android:layout_marginTop="@dimen/listViewMarY"
+            android:layout_marginEnd="@dimen/listViewMarX"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -35,29 +35,42 @@
                 android:id="@+id/add_new_collection_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/new_col" />
+                android:layout_marginTop="@dimen/btnMarY"
+                android:layout_marginBottom="@dimen/listViewMarY"
+                android:background="@drawable/btn_form"
+                android:backgroundTint="@color/light_yellow"
+                android:paddingStart="@dimen/paddingBtn"
+                android:paddingEnd="@dimen/paddingBtn"
+                android:text="@string/new_col"
+                android:textSize="@dimen/textSizeL" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/listViewMarX"
+                android:layout_marginEnd="@dimen/listViewMarY"
                 android:orientation="horizontal">
 
                 <EditText
                     android:id="@+id/add_name_collection_edt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/objSpace"
                     android:ems="10"
                     android:hint="@string/hint_name"
                     android:inputType="text"
                     android:text="@string/empty_text"
-                    android:visibility="invisible"/>
+                    android:visibility="invisible" />
+
                 <Button
                     android:id="@+id/ok_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/ok"
-                    android:visibility="invisible"/>
+                    android:visibility="invisible"
+                    android:background="@drawable/btn_form"
+                    android:backgroundTint="@color/white"/>
             </LinearLayout>
 
         </LinearLayout>

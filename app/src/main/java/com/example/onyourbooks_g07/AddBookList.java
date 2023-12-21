@@ -61,7 +61,7 @@ public class AddBookList extends AppCompatActivity {
                         Uri uri = data.getData();
                         image_uri = uri;
                         try {
-                            ImageView imageView = (ImageView) findViewById(R.id.imageView);
+                            ImageView imageView = (ImageView) findViewById(R.id.img_show);
                             imageView.getLayoutParams().height = 400;
                             Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
                             imageView.setImageBitmap(bitmap);
@@ -179,8 +179,7 @@ public class AddBookList extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.back_btn) {
-            startActivity(new Intent(this, ColumnCollectionActivity.class));
-            return false;
+            finish();
         }
         return super.onOptionsItemSelected(item);
     }

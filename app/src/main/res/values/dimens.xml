@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="textSizeM">20sp</dimen>
+    <dimen name="textSizeS">16sp</dimen>
+    <dimen name="textSizeL">24sp</dimen>
+    <dimen name="paddingBtn">16dp</dimen>
+    <dimen name="padTable">4dp</dimen>
+    <dimen name="listViewMarX">24dp</dimen>
+    <dimen name="listViewMarY">20dp</dimen>
+    <dimen name="btnMarY">40dp</dimen>
+    <dimen name="btnMarX">64dp</dimen>
+    <dimen name="objSpace">8dp</dimen>
+    <dimen name="dateSpce">12dp</dimen>
+    <dimen name="textViewSize">52dp</dimen>
+</resources>
