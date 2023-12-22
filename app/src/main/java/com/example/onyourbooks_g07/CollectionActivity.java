@@ -59,7 +59,6 @@ public class CollectionActivity extends AppCompatActivity {
 
         adapterBtn = new AdapterBtn(setList());
         recyclerView.setAdapter(adapterBtn);
-        recyclerView.setAdapter(adapterBtn);
         new_collection_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,18 +76,7 @@ public class CollectionActivity extends AppCompatActivity {
 
                         adapterBtn = new AdapterBtn(setList());
                         recyclerView.setAdapter(adapterBtn);
-                        ((AdapterBtn) adapterBtn).setOnItemClickListener(new AdapterBtn.MyClickListener() {
-                            @Override
-                            public void onItemClick(int position, View v) {
-                                Data item = adapterBtn.getDataSet().get(position);
-                                Intent intent = new Intent(CollectionActivity.this, ColumnCollectionActivity.class);
-                                String idItem = item.getId() + "";
-                                String titleItem = item.getTitle();
-                                intent.putExtra("id_of_item", idItem);
-                                intent.putExtra("title", titleItem);
-                                startActivity(intent);
-                            }
-                        });
+                        setOnItemClickAdapter();
                         add_name_collection_edt.setText("");
                         add_name_collection_edt.setVisibility(View.INVISIBLE);
                         ok_btn.setVisibility(View.INVISIBLE);
@@ -96,18 +84,7 @@ public class CollectionActivity extends AppCompatActivity {
                 });
             }
         });
-        ((AdapterBtn) adapterBtn).setOnItemClickListener(new AdapterBtn.MyClickListener() {
-            @Override
-            public void onItemClick(int position, View v) {
-                Data item = adapterBtn.getDataSet().get(position);
-                Intent intent = new Intent(CollectionActivity.this, ColumnCollectionActivity.class);
-                    String idItem = item.getId() + "";
-                    String titleItem = item.getTitle();
-                    intent.putExtra("id_of_item", idItem);
-                    intent.putExtra("title", titleItem);
-                startActivity(intent);
-            }
-        });
+        setOnItemClickAdapter();
     }
     public void addData(String colName){
         try{
@@ -142,6 +119,20 @@ public class CollectionActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_collection_activity, menu);
         return true;
+    }
+    private void setOnItemClickAdapter(){
+        ((AdapterBtn) adapterBtn).setOnItemClickListener(new AdapterBtn.MyClickListener() {
+            @Override
+            public void onItemClick(int position, View v) {
+                Data item = adapterBtn.getDataSet().get(position);
+                Intent intent = new Intent(CollectionActivity.this, ColumnCollectionActivity.class);
+                String idItem = item.getId() + "";
+                String titleItem = item.getTitle();
+                intent.putExtra("id_of_item", idItem);
+                intent.putExtra("title", titleItem);
+                startActivity(intent);
+            }
+        });
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
