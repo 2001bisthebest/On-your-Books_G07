@@ -2,7 +2,9 @@ package com.example.onyourbooks_g07;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
@@ -33,6 +35,7 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.ByteArrayOutputStream;
@@ -50,6 +53,7 @@ public class AddBookList extends AppCompatActivity {
     private Uri image_uri;
     private String listId;
     String dateStr;
+    private String emptyStr = "";
     ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
         new ActivityResultContracts.StartActivityForResult(),
         new ActivityResultCallback<ActivityResult>() {
@@ -119,33 +123,37 @@ public class AddBookList extends AppCompatActivity {
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String book_nameStr, book_priceStr;
+                String book_nameStr, book_priceStr, imageString, strMsg;
                 dateStr = updateLabel();
                 book_nameStr = book_name.getText().toString();
                 book_priceStr = book_price.getText().toString();
-                addData(dateStr, book_nameStr, book_priceStr);
-                finish();
+                imageString = decodeImg();
+                Log.d("ta", imageString);
+                if (book_nameStr.equals("") && book_priceStr.equals("") && imageString.equals("")) {
+                    strMsg = "Name, price and select image of book";
+                } else if (book_nameStr.equals("") && book_priceStr.equals("")) {
+                    strMsg = "Name and price of book";
+                } else if(book_priceStr.equals("") && imageString.equals("")){
+                    strMsg = "Price and select image of book";
+                } else if (book_nameStr.equals("") && imageString.equals("")) {
+                    strMsg = "Name and select image of book";
+                } else if (book_nameStr.equals("")) {
+                    strMsg = "Name of book";
+                } else if (book_priceStr.equals("")) {
+                    strMsg = "Price of book";
+                } else if (imageString.equals("")) {
+                    strMsg = "Image of book";
+                } else {
+                    addData(dateStr, book_nameStr, book_priceStr, imageString);
+                    strMsg = "";
+                    showAlertDialog(strMsg);
+                }
+                showAlertDialog(strMsg);
             }
         });
     }
-    public void addData(String dateStr,String book_name, String book_price){
+    public void addData(String dateStr,String book_name, String book_price, String imageString){
         try{
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            Bitmap bitmap = null;
-            String imageString = null;
-            try{
-                if(image_uri != null)
-                    bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), image_uri);
-                else
-                    bitmap = BitmapFactory.decodeResource(getResources(), R.id.pickDateBtn);
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
-                byte[] imageBytes = baos.toByteArray();
-                imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
             SQLiteDatabase db = collectionEventsData.getWritableDatabase();
             ContentValues values = new ContentValues();
             values.put(LISTID, listId);
@@ -182,5 +190,45 @@ public class AddBookList extends AppCompatActivity {
             finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+    private void showAlertDialog(String values){
+        AlertDialog.Builder builder = new AlertDialog.Builder(AddBookList.this);
+        if (values.equals("")){
+            builder.setTitle("Success!");
+            builder.setMessage("Your information has been save");
+        }else {
+            builder.setTitle("Please enter information again!");
+            builder.setMessage("You forget to enter " + values);
+        }
+        builder.setPositiveButton("CLOSE", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (values.equals("")){
+                    finish();
+                }
+            }
+        });
+        builder.show();
+    }
+    public String decodeImg(){
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        Bitmap bitmap = null;
+        String imageString = null;
+        try{
+            if(image_uri != null){
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), image_uri);
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
+                byte[] imageBytes = baos.toByteArray();
+                imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+            } else{
+//                bitmap = BitmapFactory.decodeResource(getResources(), R.id.pickDateBtn);
+                imageString = "";
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return imageString;
     }
 }

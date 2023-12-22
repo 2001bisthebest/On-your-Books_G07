@@ -10,6 +10,7 @@ import static com.example.onyourbooks_g07.Constants.TABLE_NAME_COL;
 import static com.example.onyourbooks_g07.Constants.TABLE_NAME_LIST;
 
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -28,6 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -67,8 +69,9 @@ public class CollectionActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         String nameBtn = add_name_collection_edt.getText().toString();
-                        Log.d("ta", nameBtn);
-                        if(nameBtn.length() > 1){
+                        if(nameBtn.equals("")){
+                            showAlertDialog();
+                        }else {
                             addData(nameBtn);
                         }
 
@@ -148,5 +151,17 @@ public class CollectionActivity extends AppCompatActivity {
             return false;
         }
         return super.onOptionsItemSelected(item);
+    }
+    private void showAlertDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(CollectionActivity.this);
+
+        builder.setTitle("Please try again!");
+        builder.setMessage("You forget to enter name of collection.");
+        builder.setPositiveButton("CLOSE", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        builder.show();
     }
 }
